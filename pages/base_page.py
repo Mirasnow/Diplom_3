@@ -13,10 +13,10 @@ class BasePage:
         return WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located(locator))
 
     @allure.step('Нажатие на указанный элемент')
-    def click_on_element(self, browser, locator):
+    def click_on_element(self, locator):
         element = self.find_element_with_wait(locator)
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        browser.execute_script("arguments[0].click();", element)
+        self.driver.execute_script("arguments[0].click();", element)
 
     @allure.step('Заполнение указанного поля данными')
     def set_text_to_element(self, locator, text):
@@ -31,10 +31,10 @@ class BasePage:
         return element.text
 
     @allure.step('Перетаскивание элемента')
-    def drag_and_drop_element(self, driver, locator_start, locator_final):
+    def drag_and_drop_element(self, locator_start, locator_final):
         element_start = self.find_element_with_wait(locator_start)
         element_final = self.find_element_with_wait(locator_final)
-        drag_and_drop(driver, element_start, element_final)
+        drag_and_drop(element_start, element_final)
 
 
 

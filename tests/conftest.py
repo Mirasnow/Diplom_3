@@ -1,7 +1,8 @@
 import pytest
 import requests
 from selenium import webdriver
-from data import Urls, CreateNewUser
+from data import Urls
+from helpers import CreateNewUser
 
 
 @pytest.fixture(params=['chrome', 'firefox'])

@@ -14,7 +14,7 @@ class TestForgotPasswordPage:
     @allure.description('Проверка, что нажатие на кнопку "Восстановить пароль" открывает страницу восстановления пароля')
     def test_click_on_pass_recovery_button_opens_recovery_page(self, browser_driver):
         forgot_page = ForgotPasswordPage(browser_driver)
-        forgot_page.recover_password(browser_driver, Mpl.account_button, Lpl.forgot_password_button,
+        forgot_page.recover_password(Mpl.account_button, Lpl.forgot_password_button,
                                      Fpl.email_entry_field, Fpl.recover_button)
         WebDriverWait(browser_driver, 3).until(EC.url_to_be(Urls.reset_password_url))
         result = browser_driver.current_url
@@ -25,7 +25,7 @@ class TestForgotPasswordPage:
                         'открывается страница "Сброс пароля"')
     def test_input_email_and_click_on_pass_recovery_button_opens_pass_page(self, browser_driver):
         forgot_page = ForgotPasswordPage(browser_driver)
-        forgot_page.page_recover(browser_driver, Mpl.account_button, Lpl.forgot_password_button)
+        forgot_page.page_recover(Mpl.account_button, Lpl.forgot_password_button)
         browser_driver.implicitly_wait(3)
         result = browser_driver.current_url
         assert result == Urls.forgot_password_url
@@ -37,7 +37,7 @@ class TestForgotPasswordPage:
                         'подсвечивается поле ввода пароля на странице "Сброс пароля"')
     def test_highlight_pass_entry_field(self, browser_driver):
         forgot_page = ForgotPasswordPage(browser_driver)
-        forgot_page.hide_password(browser_driver, Mpl.account_button, Fpl.email_entry_field)
+        forgot_page.hide_password(Mpl.account_button, Fpl.email_entry_field)
         element = browser_driver.find_element(*Fpl.email_entry_field)
         tab = element.find_element(*Lpl.email_active_field)
         tab_class = tab.get_attribute("class")
